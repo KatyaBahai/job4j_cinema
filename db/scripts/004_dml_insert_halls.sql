@@ -1,0 +1,2 @@
+INSERT into halls(id, name, row_count, place_count, description) values(0, 'small', 5, 30, 'small hall');
+INSERT into halls(id, name, row_count, place_count, description) values(0, 'small', 10, 100, 'big hall');
