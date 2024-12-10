@@ -1,11 +1,20 @@
 package ru.job4j.cinema.model;
 
+import java.util.Map;
+
 public class Hall {
     private int id;
     private String name;
     private int rowCount;
     private int placeCount;
     private String description;
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "name", "name",
+            "rowCount", "row_count",
+            "placeCount", "place_count",
+            "description", "description"
+    );
 
     public Hall(int id, String name, int rowCount, int placeCount, String description) {
         this.id = id;
