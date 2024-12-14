@@ -1,10 +1,12 @@
 package ru.job4j.cinema.model;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class Film {
     private int id;
     private String name;
+    private String description;
     private int year;
     private int genreId;
     private int minimalAge;
@@ -12,16 +14,45 @@ public class Film {
     private int fileId;
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
+            "name", "name",
+            "description", "description",
+            "year", "year",
             "genreId", "genre_id",
             "minimalAge", "minimal_age",
             "durationInMinutes", "durationInMinutes",
             "fileId", "file_id"
     );
 
-    public Film(int id, String name, int year, int genreId,
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Film film = (Film) o;
+        return id == film.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Film(int id, String name, String description, int year, int genreId,
                 int minimalAge, int durationInMinutes, int fileId) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.year = year;
         this.genreId = genreId;
         this.minimalAge = minimalAge;
