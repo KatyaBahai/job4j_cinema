@@ -1,4 +1,4 @@
-package ru.job4j.cinema.repositories;
+package ru.job4j.cinema.repository;
 
 import ru.job4j.cinema.model.User;
 

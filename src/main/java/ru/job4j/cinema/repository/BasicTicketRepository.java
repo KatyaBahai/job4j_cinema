@@ -1,4 +1,4 @@
-package ru.job4j.cinema.repositories;
+package ru.job4j.cinema.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
