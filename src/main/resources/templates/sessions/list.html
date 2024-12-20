@@ -25,14 +25,16 @@
                     <th scope="col">Film</th>
                     <th scope="col">Start time</th>
                     <th scope="col">Price</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="sessionDto: ${sessions}">
+                <tr th:each="sessionDto: ${sessionDtos}">
                     <td th:text="${sessionDto.hall}" />
-                    <td><a th:text="${sessionDto.film}" th:href="@{/tickets/{sessionId}(sessionId=${sessionDto.id})}"></a></td>
+                    <td><a th:text="${sessionDto.film}" th:href="@{/sessions/{sessionId}(sessionId=${sessionDto.id})}"></a></td>
                     <td th:text="${#temporals.format(sessionDto.startTime, 'dd-MM-yyyy HH:mm')}" />
                     <td th:text="${sessionDto.price}" />
+                    <td th:text="purchase" th:href="@{}"/>
                 </tr>
                 </tbody>
             </table>

@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface TicketRepository {
 
-    Optional<Ticket> findById(int id);
+    Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId);
 
     Collection<Ticket> findAllByUserId(int userId);
 
-    Optional<Ticket> save(Ticket ticker);
+    Optional<Ticket> save(Ticket ticket);
 }

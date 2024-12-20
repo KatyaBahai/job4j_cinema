@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.FilmDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.Genre;
-import ru.job4j.cinema.repository.BasicFilmRepository;
+import ru.job4j.cinema.repository.FilmRepository;
 import ru.job4j.cinema.repository.GenreRepository;
 
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 @Service
 public class BasicFilmService implements FilmService {
-    private final BasicFilmRepository filmRepository;
+    private final FilmRepository filmRepository;
     private final GenreRepository genreRepository;
 
-    public BasicFilmService(BasicFilmRepository filmRepository, GenreRepository genreRepository) {
+    public BasicFilmService(FilmRepository filmRepository, GenreRepository genreRepository) {
         this.filmRepository = filmRepository;
         this.genreRepository = genreRepository;
     }

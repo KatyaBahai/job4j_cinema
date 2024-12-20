@@ -16,8 +16,8 @@ public class BasicTicketService implements TicketService {
     }
 
     @Override
-    public Optional<Ticket> findById(int id) {
-        return ticketRepository.findById(id);
+    public Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId) {
+        return ticketRepository.find(rowNumber, placeNumber, sessionId);
     }
 
     @Override

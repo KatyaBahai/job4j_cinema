@@ -20,11 +20,13 @@ public class BasicTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Optional<Ticket> findById(int id) {
+    public Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId) {
         try (Connection connection = sql2o.open()) {
-            String sql = "SELECT * FROM tickets WHERE id = :id";
+            String sql = "SELECT * FROM tickets WHERE row_number = :rowNumber, place_number = :placeNumber, session_id = :sessionId";
             Query query = connection.createQuery(sql)
-                    .addParameter("id", id);
+                    .addParameter("rowNumber", rowNumber)
+                    .addParameter("placeNumber", placeNumber)
+                    .addParameter("session", sessionId);
             Ticket ticket = query.executeAndFetchFirst(Ticket.class);
             return Optional.ofNullable(ticket);
         }
@@ -60,4 +62,5 @@ public class BasicTicketRepository implements TicketRepository {
         }
         return Optional.empty();
     }
+
 }
