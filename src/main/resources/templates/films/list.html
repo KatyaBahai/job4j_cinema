@@ -20,17 +20,21 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
                     <th scope="col"></th>
                     <th scope="col">Film</th>
                     <th scope="col">Genre</th>
+                    <th scope="col">Minimal Age</th>
+                    <th scope="col">Duration</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="filmDto: ${filmDtos}">
-                    <td><img th:src="@{/files/{fileId}(fileId=*{filmDto.fileId})}" class="w-100" alt="No image"></td>
+                    <td><img th:src="@{/files/{fileId}(fileId=${filmDto.fileId})}" class="w-100" alt="No image"></td>
                     <td th:text="${filmDto.name}" />
                     <td th:text="${filmDto.genre}" />
+                    <td th:text="${filmDto.minimalAge}" />
+                    <td th:text="${filmDto.durationInMinutes}" minutes. />
                 </tr>
                 </tbody>
             </table>

@@ -1,10 +1,9 @@
 package ru.job4j.cinema.service;
 
-import ru.job4j.cinema.dto.FilmDto;
+import org.springframework.stereotype.Service;
 import ru.job4j.cinema.dto.SessionDto;
 import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
-import ru.job4j.cinema.model.Genre;
 import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.repository.*;
 
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class BasicSessionService implements SessionService {
     private final SessionRepository sessionRepository;
     private final HallRepository hallRepository;
@@ -35,7 +35,8 @@ public class BasicSessionService implements SessionService {
 
         SessionDto sessionDto = new SessionDto(session.getId(), filmOptional.get().getName(),
                 hallOptional.get().getName(), session.getStartTime(),
-                filmOptional.get().getDurationInMinutes(), session.getPrice());
+                filmOptional.get().getDurationInMinutes(), session.getPrice(),
+                hallOptional.get().getRowCount(), hallOptional.get().getPlaceCount());
         return Optional.of(sessionDto);
     }
 
@@ -49,7 +50,8 @@ public class BasicSessionService implements SessionService {
             Optional<Film> filmOptional = filmRepository.findById(session.getFilmId());
             sessionDtoCollection.add(new SessionDto(session.getId(), filmOptional.get().getName(),
                     hallOptional.get().getName(), session.getStartTime(),
-                    filmOptional.get().getDurationInMinutes(), session.getPrice()));
+                    filmOptional.get().getDurationInMinutes(), session.getPrice(),
+                    hallOptional.get().getRowCount(), hallOptional.get().getPlaceCount()));
         }
         return sessionDtoCollection;
     }

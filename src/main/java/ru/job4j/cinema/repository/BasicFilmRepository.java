@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.Film;
+import ru.job4j.cinema.model.FilmSession;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class BasicFilmRepository implements FilmRepository {
         try (var connection = sql2o.open()) {
             Query query = connection.createQuery("SELECT * FROM films WHERE id = :id");
             return Optional.of(query
+                    .setColumnMappings(Film.COLUMN_MAPPING)
                     .addParameter("id", id)
                     .executeAndFetchFirst(Film.class));
         }
@@ -30,7 +32,7 @@ public class BasicFilmRepository implements FilmRepository {
     public Collection<Film> findAll() {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM films");
-            return query.executeAndFetch(Film.class);
+            return query.setColumnMappings(Film.COLUMN_MAPPING).executeAndFetch(Film.class);
         }
     }
 }

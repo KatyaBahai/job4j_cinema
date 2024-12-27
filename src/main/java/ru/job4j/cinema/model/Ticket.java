@@ -11,10 +11,10 @@ public class Ticket {
 
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
-            "sessionId", "session_id",
-            "rowNumber", "row_number",
-            "placeNumber", "place_number",
-            "userId", "user_id"
+            "session_id", "sessionId",
+            "row_number",  "rowNumber",
+            "place_number", "placeNumber",
+            "user_id", "userId"
     );
 
     public Ticket(int id, int sessionId, int rowNumber, int placeNumber, int userId) {

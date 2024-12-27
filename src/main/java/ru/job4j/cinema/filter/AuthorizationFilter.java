@@ -33,6 +33,6 @@ public class AuthorizationFilter extends HttpFilter {
     }
 
     private boolean isForbidden(String uri) {
-        return uri.startsWith("/tickets/buy");
+        return uri.startsWith("/sessions/");
     }
 }

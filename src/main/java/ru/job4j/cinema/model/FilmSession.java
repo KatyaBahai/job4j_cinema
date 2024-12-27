@@ -12,10 +12,10 @@ public class FilmSession {
     private int price;
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
             "id", "id",
-            "filmId", "film_id",
-            "hallId", "hall_id",
-            "startTime", "start_time",
-            "endTime", "end_time",
+            "film_Id", "filmId",
+            "hall_id", "hallId",
+             "start_time", "startTime",
+            "end_time", "endTime",
             "price", "price"
     );
 

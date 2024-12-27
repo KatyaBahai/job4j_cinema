@@ -9,14 +9,34 @@ public class SessionDto {
     private LocalDateTime startTime;
     private int durationInMinutes;
     private int price;
+    private int rowCount;
+    private int placeCount;
 
-    public SessionDto(int sessionId, String film, String hall, LocalDateTime startTime, int durationInMinutes, int price) {
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+
+    public int getPlaceCount() {
+        return placeCount;
+    }
+
+    public void setPlaceCount(int placeCount) {
+        this.placeCount = placeCount;
+    }
+
+    public SessionDto(int sessionId, String film, String hall, LocalDateTime startTime, int durationInMinutes, int price, int rowCount, int placeCount) {
         this.sessionId = sessionId;
         this.film = film;
         this.hall = hall;
         this.startTime = startTime;
         this.durationInMinutes = durationInMinutes;
         this.price = price;
+        this.rowCount = rowCount;
+        this.placeCount = placeCount;
     }
 
     public int getSessionId() {

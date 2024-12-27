@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
 import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -22,12 +23,12 @@ public class BasicTicketRepository implements TicketRepository {
     @Override
     public Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId) {
         try (Connection connection = sql2o.open()) {
-            String sql = "SELECT * FROM tickets WHERE row_number = :rowNumber, place_number = :placeNumber, session_id = :sessionId";
+            String sql = "SELECT * FROM tickets WHERE row_number = :rowNumber AND place_number = :placeNumber AND session_id = :sessionId";
             Query query = connection.createQuery(sql)
                     .addParameter("rowNumber", rowNumber)
                     .addParameter("placeNumber", placeNumber)
-                    .addParameter("session", sessionId);
-            Ticket ticket = query.executeAndFetchFirst(Ticket.class);
+                    .addParameter("sessionId", sessionId);
+            Ticket ticket = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetchFirst(Ticket.class);
             return Optional.ofNullable(ticket);
         }
     }
@@ -47,13 +48,13 @@ public class BasicTicketRepository implements TicketRepository {
         try (Connection connection = sql2o.open()) {
             String sql = """
                       INSERT INTO tickets(session_id, row_number, place_number, user_id)
-                      VALUES (:sessionId, :rowNumber, :placeNumber :user_id)
+                      VALUES (:sessionId, :rowNumber, :placeNumber, :userId)
                       """;
             Query query = connection.createQuery(sql, true)
-                    .addParameter("session_id", ticket.getSessionId())
-                    .addParameter("row_number", ticket.getRowNumber())
-                    .addParameter("place_number", ticket.getPlaceNumber())
-                    .addParameter("user_id", ticket.getUserId());
+                    .addParameter("sessionId", ticket.getSessionId())
+                    .addParameter("rowNumber", ticket.getRowNumber())
+                    .addParameter("placeNumber", ticket.getPlaceNumber())
+                    .addParameter("userId", ticket.getUserId());
             int serialID = query.executeUpdate().getKey(Integer.class);
             ticket.setId(serialID);
             return Optional.of(ticket);

@@ -20,7 +20,6 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th><i class="bi bi-square"></i></th>
                     <th scope="col">Hall</th>
                     <th scope="col">Film</th>
                     <th scope="col">Start time</th>
@@ -31,10 +30,10 @@
                 <tbody>
                 <tr th:each="sessionDto: ${sessionDtos}">
                     <td th:text="${sessionDto.hall}" />
-                    <td><a th:text="${sessionDto.film}" th:href="@{/sessions/{sessionId}(sessionId=${sessionDto.id})}"></a></td>
+                    <td th:text="${sessionDto.film}" />
                     <td th:text="${#temporals.format(sessionDto.startTime, 'dd-MM-yyyy HH:mm')}" />
                     <td th:text="${sessionDto.price}" />
-                    <td th:text="purchase" th:href="@{}"/>
+                    <td> <a th:text="purchase" th:href="@{/sessions/{sessionId}(sessionId=${sessionDto.sessionId})}"></a></td>
                 </tr>
                 </tbody>
             </table>
