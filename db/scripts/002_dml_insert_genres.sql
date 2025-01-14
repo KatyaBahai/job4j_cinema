@@ -1,6 +1,6 @@
-insert into genres(name) values('thriller');
-insert into genres(name) values('romcom');
-insert into genres(name) values('horror');
-insert into genres(name) values('documentary');
-insert into genres(name) values('fantasy');
-insert into genres(name) values('sci-fi');
+insert into genres(id, name) values(0, 'thriller');
+insert into genres(id, name) values(1, 'romcom');
+insert into genres(id, name) values(2, 'horror');
+insert into genres(id, name) values(3, 'documentary');
+insert into genres(id, name) values(4, 'fantasy');
+insert into genres(id, name) values(5, 'sci-fi');

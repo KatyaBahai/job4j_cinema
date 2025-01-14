@@ -23,17 +23,18 @@ public class TicketController {
 
     @PostMapping("/buy")
     public String getPurchasePage(Model model, @ModelAttribute Ticket ticket,  HttpServletRequest request) {
-        Optional<Ticket> ticketOptional = ticketService.find(ticket.getRowNumber(), ticket.getPlaceNumber(), ticket.getSessionId());
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        ticket.setUserId(user.getId());
+        Optional<Ticket> ticketOptional = ticketService.save(ticket);
         if (ticketOptional.isEmpty()) {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            ticket.setUserId(user.getId());
-            ticketService.save(ticket);
-            model.addAttribute("message", "You have successfully purchased a ticket! Check you email.");
+            model.addAttribute("message",
+                    "Sorry, this seat has already been chosen by somebody. Please, try another one.");
             return "/tickets/purchase";
         }
-        model.addAttribute("message", " Sorry, this seat has already been chosen by somebody. Please, try another one.");
-        return "/tickets/purchase";
+        model.addAttribute("message",
+                "You have successfully purchased a ticket! Check you email.");
+         return "/tickets/purchase";
     }
 
 }

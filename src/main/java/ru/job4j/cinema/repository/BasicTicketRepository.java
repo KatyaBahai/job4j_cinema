@@ -21,25 +21,15 @@ public class BasicTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId) {
+    public Optional<Ticket> find(Ticket ticket) {
         try (Connection connection = sql2o.open()) {
             String sql = "SELECT * FROM tickets WHERE row_number = :rowNumber AND place_number = :placeNumber AND session_id = :sessionId";
             Query query = connection.createQuery(sql)
-                    .addParameter("rowNumber", rowNumber)
-                    .addParameter("placeNumber", placeNumber)
-                    .addParameter("sessionId", sessionId);
-            Ticket ticket = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetchFirst(Ticket.class);
-            return Optional.ofNullable(ticket);
-        }
-    }
-
-    @Override
-    public Collection<Ticket> findAllByUserId(int userId) {
-        try (Connection connection = sql2o.open()) {
-            String sql = "SELECT * FROM tickets WHERE user_id = :id";
-            Query query = connection.createQuery(sql)
-                    .addParameter("user_id", userId);
-            return query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetch(Ticket.class);
+                    .addParameter("rowNumber", ticket.getRowNumber())
+                    .addParameter("placeNumber", ticket.getPlaceNumber())
+                    .addParameter("sessionId", ticket.getSessionId());
+            Ticket existingTicket = query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetchFirst(Ticket.class);
+            return Optional.ofNullable(existingTicket);
         }
     }
 
@@ -62,6 +52,24 @@ public class BasicTicketRepository implements TicketRepository {
             log.error(e.getMessage(), e);
         }
         return Optional.empty();
+    }
+
+    public boolean deleteById(int id) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "DELETE FROM tickets WHERE id = :id";
+            Query query = connection.createQuery(sql)
+                    .addParameter("id", id);
+            int affectedRows = query.executeUpdate().getResult();
+            return affectedRows > 0;
+        }
+    }
+
+    public Collection<Ticket> findAll() {
+        try (Connection connection = sql2o.open()) {
+            String sql = "SELECT * FROM tickets";
+            Query query = connection.createQuery(sql);
+            return query.setColumnMappings(Ticket.COLUMN_MAPPING).executeAndFetch(Ticket.class);
+        }
     }
 
 }

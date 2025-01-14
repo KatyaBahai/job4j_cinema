@@ -29,7 +29,9 @@ public class BasicFilmService implements FilmService {
         }
         Film film = filmOptional.get();
         Optional<Genre> genreOptional = genreRepository.findById(film.getGenreId());
-        
+        if (genreOptional.isEmpty()) {
+            return Optional.empty();
+        }
         FilmDto filmDto = new FilmDto(film.getId(), film.getName(),
                 film.getDescription(), film.getYear(),
                 film.getMinimalAge(), film.getDurationInMinutes(),

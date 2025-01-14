@@ -7,9 +7,7 @@ import java.util.Optional;
 
 public interface TicketService {
 
-    Optional<Ticket> find(int rowNumber, int placeNumber, int sessionId);
-
-    Collection<Ticket> findAllByUserId(int userId);
+    Optional<Ticket> find(Ticket ticket);
 
     Optional<Ticket> save(Ticket ticket);
 }
