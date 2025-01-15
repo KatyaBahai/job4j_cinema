@@ -27,10 +27,26 @@ class FilmControllerTest {
 
     @Test
     public void whenGetAllFilmsThenFilmsList() {
-        FilmDto filmDto1 = new FilmDto(
-                0, "Finding Nemo", "-", 1990, 12, 120, 2, "family");
-        FilmDto filmDto2 = new FilmDto(
-                0, "Shrek", "small", 1992, 12, 120, 2, "family");
+        FilmDto filmDto1 = new FilmDto.FilmDtoBuilder()
+                .setId(0)
+                .setName("Finding Nemo")
+                .setFileId(2)
+                .setDescription("-")
+                .setDurationInMinutes(120)
+                .setGenre("family")
+                .setMinimalAge(6)
+                .setYear(1990)
+                .build();
+        FilmDto filmDto2 = new FilmDto.FilmDtoBuilder()
+                .setId(0)
+                .setName("Shrek")
+                .setFileId(2)
+                .setDescription("-")
+                .setDurationInMinutes(120)
+                .setGenre("family")
+                .setMinimalAge(6)
+                .setYear(1992)
+                .build();
         List<FilmDto> expectedFilmDtos = List.of(filmDto1, filmDto2);
         when(filmService.getAllFilms()).thenReturn(expectedFilmDtos);
 

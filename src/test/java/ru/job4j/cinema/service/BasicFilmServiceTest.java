@@ -32,8 +32,17 @@ class BasicFilmServiceTest {
     @Test
     public void whenGetFilmByIdThenGetFilmDto() {
         int filmId = 1;
-        Film film = new Film(filmId, "Film Name", "Description",
-                2021, 13, 120, 101, 2);
+        Film film = new Film.FilmBuilder()
+                .setId(filmId)
+                .setName("Film Name")
+                .setDescription("Description")
+                .setFileId(101)
+                .setGenreId(2)
+                .setMinimalAge(13)
+                .setDurationInMinutes(120)
+                .setYear(2021)
+                .build();
+
         Genre genre = new Genre(2, "Action");
 
         when(filmRepository.findById(filmId)).thenReturn(Optional.of(film));
@@ -62,8 +71,16 @@ class BasicFilmServiceTest {
     @Test
     public void whenGetNonExistingGenreThenGetEmptyOptional() {
         int filmId = 1;
-        Film film = new Film(filmId, "Film Name", "Description",
-                2021, 13, 120, 101, 2);
+        Film film = new Film.FilmBuilder()
+                .setId(filmId)
+                .setName("Film Name")
+                .setDescription("Description")
+                .setFileId(101)
+                .setGenreId(2)
+                .setMinimalAge(13)
+                .setDurationInMinutes(120)
+                .setYear(2021)
+                .build();
 
         when(filmRepository.findById(filmId)).thenReturn(Optional.of(film));
         when(genreRepository.findById(filmId)).thenReturn(Optional.empty());
@@ -75,8 +92,26 @@ class BasicFilmServiceTest {
 
     @Test
     public void whenGetAllFilmsThenGetFilmDtos() {
-        Film film1 = new Film(1, "Film 1", "Description 1", 2021, 13, 120, 101, 2);
-        Film film2 = new Film(2, "Film 2", "Description 2", 2022, 16, 140, 102, 3);
+        Film film1 = new Film.FilmBuilder()
+                .setId(2)
+                .setName("Film Name")
+                .setDescription("Description")
+                .setFileId(101)
+                .setGenreId(2)
+                .setMinimalAge(13)
+                .setDurationInMinutes(120)
+                .setYear(2021)
+                .build();
+        Film film2 = new Film.FilmBuilder()
+                .setId(1)
+                .setName("Film Name")
+                .setDescription("Description")
+                .setFileId(101)
+                .setGenreId(3)
+                .setMinimalAge(13)
+                .setDurationInMinutes(120)
+                .setYear(2021)
+                .build();
         Genre genre1 = new Genre(2, "Action");
         Genre genre2 = new Genre(3, "Comedy");
 

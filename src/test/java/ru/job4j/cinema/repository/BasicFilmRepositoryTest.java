@@ -37,7 +37,16 @@ class BasicFilmRepositoryTest {
 
     @Test
     public void whenFindByIdThenFound() {
-        Film film = new Film(0, "Blade Runner", "-", 1982, 5, 12, 120, 0);
+        Film film = new Film.FilmBuilder()
+                .setId(0)
+                .setName("Blade Runner")
+                .setDescription("-")
+                .setFileId(0)
+                .setGenreId(5)
+                .setMinimalAge(12)
+                .setDurationInMinutes(120)
+                .setYear(1982)
+                .build();
         Optional<Film> expectedFilm = basicFilmRepository.findById(film.getId());
         assertThat(expectedFilm.get()).usingRecursiveComparison().isEqualTo(film);
     }

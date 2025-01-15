@@ -10,16 +10,18 @@ public class FilmDto {
     private int fileId;
     private String genre;
 
-    public FilmDto(int id, String name, String description,
-                   int year, int minimalAge, int durationInMinutes, int fileId, String genre) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.year = year;
-        this.minimalAge = minimalAge;
-        this.durationInMinutes = durationInMinutes;
-        this.fileId = fileId;
-        this.genre = genre;
+    private FilmDto(FilmDtoBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.year = builder.year;
+        this.minimalAge = builder.minimalAge;
+        this.durationInMinutes = builder.durationInMinutes;
+        this.fileId = builder.fileId;
+        this.genre = builder.genre;
+    }
+
+    public FilmDto() {
     }
 
     public int getId() {
@@ -84,5 +86,60 @@ public class FilmDto {
 
     public void setFileId(int fileId) {
         this.fileId = fileId;
+    }
+
+    public static class FilmDtoBuilder {
+        private int id;
+        private String name;
+        private String description;
+        private int year;
+        private int minimalAge;
+        private int durationInMinutes;
+        private int fileId;
+        private String genre;
+
+        public FilmDtoBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public FilmDtoBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public FilmDtoBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public FilmDtoBuilder setYear(int year) {
+            this.year = year;
+            return this;
+        }
+
+        public FilmDtoBuilder setMinimalAge(int minimalAge) {
+            this.minimalAge = minimalAge;
+            return this;
+        }
+
+        public FilmDtoBuilder setDurationInMinutes(int durationInMinutes) {
+            this.durationInMinutes = durationInMinutes;
+            return this;
+        }
+
+        public FilmDtoBuilder setFileId(int fileId) {
+            this.fileId = fileId;
+            return this;
+        }
+
+        public FilmDtoBuilder setGenre(String genre) {
+            this.genre = genre;
+            return this;
+        }
+
+        public FilmDto build() {
+            return new FilmDto(this);
+        }
     }
 }

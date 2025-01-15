@@ -32,10 +32,16 @@ public class BasicFilmService implements FilmService {
         if (genreOptional.isEmpty()) {
             return Optional.empty();
         }
-        FilmDto filmDto = new FilmDto(film.getId(), film.getName(),
-                film.getDescription(), film.getYear(),
-                film.getMinimalAge(), film.getDurationInMinutes(),
-                film.getFileId(), genreOptional.get().getName());
+        FilmDto filmDto = new FilmDto.FilmDtoBuilder()
+                .setId(film.getId())
+                .setName(film.getName())
+                .setFileId(film.getFileId())
+                .setDescription(film.getDescription())
+                .setDurationInMinutes(film.getDurationInMinutes())
+                .setGenre(genreOptional.get().getName())
+                .setMinimalAge(film.getMinimalAge())
+                .setYear(film.getYear())
+                .build();
         return Optional.of(filmDto);
 
     }
@@ -46,10 +52,16 @@ public class BasicFilmService implements FilmService {
         Collection<FilmDto> filmDtoCollection = new ArrayList<>();
         for (Film film : filmCollection) {
             Optional<Genre> genreOptional = genreRepository.findById(film.getGenreId());
-           filmDtoCollection.add(new FilmDto(film.getId(), film.getName(),
-                   film.getDescription(), film.getYear(),
-                   film.getMinimalAge(), film.getDurationInMinutes(),
-                   film.getFileId(), genreOptional.get().getName()));
+           filmDtoCollection.add(new FilmDto.FilmDtoBuilder()
+                   .setId(film.getId())
+                   .setName(film.getName())
+                   .setFileId(film.getFileId())
+                   .setDescription(film.getDescription())
+                   .setDurationInMinutes(film.getDurationInMinutes())
+                   .setGenre(genreOptional.get().getName())
+                   .setMinimalAge(film.getMinimalAge())
+                   .setYear(film.getYear())
+                   .build());
         }
         return filmDtoCollection;
     }

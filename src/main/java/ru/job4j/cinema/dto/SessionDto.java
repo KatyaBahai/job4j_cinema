@@ -12,6 +12,20 @@ public class SessionDto {
     private int rowCount;
     private int placeCount;
 
+    private SessionDto(SessionDtoBuilder builder) {
+        this.sessionId = builder.sessionId;
+        this.film = builder.film;
+        this.hall = builder.hall;
+        this.startTime = builder.startTime;
+        this.durationInMinutes = builder.durationInMinutes;
+        this.price = builder.price;
+        this.rowCount = builder.rowCount;
+        this.placeCount = builder.placeCount;
+    }
+
+    public SessionDto() {
+    }
+
     public int getRowCount() {
         return rowCount;
     }
@@ -25,17 +39,6 @@ public class SessionDto {
     }
 
     public void setPlaceCount(int placeCount) {
-        this.placeCount = placeCount;
-    }
-
-    public SessionDto(int sessionId, String film, String hall, LocalDateTime startTime, int durationInMinutes, int price, int rowCount, int placeCount) {
-        this.sessionId = sessionId;
-        this.film = film;
-        this.hall = hall;
-        this.startTime = startTime;
-        this.durationInMinutes = durationInMinutes;
-        this.price = price;
-        this.rowCount = rowCount;
         this.placeCount = placeCount;
     }
 
@@ -85,5 +88,60 @@ public class SessionDto {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public static class SessionDtoBuilder {
+        private int sessionId;
+        private String film;
+        private String hall;
+        private LocalDateTime startTime;
+        private int durationInMinutes;
+        private int price;
+        private int rowCount;
+        private int placeCount;
+
+        public SessionDtoBuilder setSessionId(int sessionId) {
+            this.sessionId = sessionId;
+            return this;
+        }
+
+        public SessionDtoBuilder setFilm(String film) {
+            this.film = film;
+            return this;
+        }
+
+        public SessionDtoBuilder setHall(String hall) {
+            this.hall = hall;
+            return this;
+        }
+
+        public SessionDtoBuilder setStartTime(LocalDateTime startTime) {
+            this.startTime = startTime;
+            return this;
+        }
+
+        public SessionDtoBuilder setDurationInMinutes(int durationInMinutes) {
+            this.durationInMinutes = durationInMinutes;
+            return this;
+        }
+
+        public SessionDtoBuilder setPrice(int price) {
+            this.price = price;
+            return this;
+        }
+
+        public SessionDtoBuilder setRowCount(int rowCount) {
+            this.rowCount = rowCount;
+            return this;
+        }
+
+        public SessionDtoBuilder setPlaceCount(int placeCount) {
+            this.placeCount = placeCount;
+            return this;
+        }
+
+        public SessionDto build() {
+            return new SessionDto(this);
+        }
     }
 }

@@ -23,41 +23,18 @@ public class Film {
             "file_id", "fileId"
     );
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Film film = (Film) o;
-        return id == film.id;
+    public Film() {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Film(int id, String name, String description, int year, int genreId,
-                int minimalAge, int durationInMinutes, int fileId) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.year = year;
-        this.genreId = genreId;
-        this.minimalAge = minimalAge;
-        this.durationInMinutes = durationInMinutes;
-        this.fileId = fileId;
+    private Film(FilmBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.year = builder.year;
+        this.genreId = builder.genreId;
+        this.minimalAge = builder.minimalAge;
+        this.durationInMinutes = builder.durationInMinutes;
+        this.fileId = builder.fileId;
     }
 
     public int getId() {
@@ -114,5 +91,85 @@ public class Film {
 
     public void setFileId(int fileId) {
         this.fileId = fileId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Film film = (Film) o;
+        return id == film.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public static class FilmBuilder {
+        private int id;
+        private String name;
+        private String description;
+        private int year;
+        private int genreId;
+        private int minimalAge;
+        private int durationInMinutes;
+        private int fileId;
+
+        public FilmBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public FilmBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public FilmBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public FilmBuilder setYear(int year) {
+            this.year = year;
+            return this;
+        }
+
+        public FilmBuilder setGenreId(int genreId) {
+            this.genreId = genreId;
+            return this;
+        }
+
+        public FilmBuilder setMinimalAge(int minimalAge) {
+            this.minimalAge = minimalAge;
+            return this;
+        }
+
+        public FilmBuilder setDurationInMinutes(int durationInMinutes) {
+            this.durationInMinutes = durationInMinutes;
+            return this;
+        }
+
+        public FilmBuilder setFileId(int fileId) {
+            this.fileId = fileId;
+            return this;
+        }
+
+        public Film build() {
+            return new Film(this);
+        }
     }
 }

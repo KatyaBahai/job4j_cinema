@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
+import static java.time.LocalDateTime.now;
+
 @Service
 public class BasicSessionService implements SessionService {
     private final SessionRepository sessionRepository;
@@ -33,10 +35,16 @@ public class BasicSessionService implements SessionService {
         Optional<Film> filmOptional = filmRepository.findById(session.getFilmId());
         Optional<Hall> hallOptional = hallRepository.findById(session.getHallId());
 
-        SessionDto sessionDto = new SessionDto(session.getId(), filmOptional.get().getName(),
-                hallOptional.get().getName(), session.getStartTime(),
-                filmOptional.get().getDurationInMinutes(), session.getPrice(),
-                hallOptional.get().getRowCount(), hallOptional.get().getPlaceCount());
+        SessionDto sessionDto = new SessionDto.SessionDtoBuilder()
+                .setSessionId(session.getId())
+                .setFilm(filmOptional.get().getName())
+                .setDurationInMinutes(filmOptional.get().getDurationInMinutes())
+                .setHall(hallOptional.get().getName())
+                .setPlaceCount(hallOptional.get().getPlaceCount())
+                .setPrice(session.getPrice())
+                .setRowCount(hallOptional.get().getRowCount())
+                .setStartTime(session.getStartTime())
+                .build();
         return Optional.of(sessionDto);
     }
 
@@ -48,10 +56,16 @@ public class BasicSessionService implements SessionService {
         for (FilmSession session : sessionCollection) {
             Optional<Hall> hallOptional = hallRepository.findById(session.getHallId());
             Optional<Film> filmOptional = filmRepository.findById(session.getFilmId());
-            sessionDtoCollection.add(new SessionDto(session.getId(), filmOptional.get().getName(),
-                    hallOptional.get().getName(), session.getStartTime(),
-                    filmOptional.get().getDurationInMinutes(), session.getPrice(),
-                    hallOptional.get().getRowCount(), hallOptional.get().getPlaceCount()));
+            sessionDtoCollection.add(new SessionDto.SessionDtoBuilder()
+                    .setSessionId(session.getId())
+                    .setFilm(filmOptional.get().getName())
+                    .setDurationInMinutes(filmOptional.get().getDurationInMinutes())
+                    .setHall(hallOptional.get().getName())
+                    .setPlaceCount(hallOptional.get().getPlaceCount())
+                    .setPrice(session.getPrice())
+                    .setRowCount(hallOptional.get().getRowCount())
+                    .setStartTime(session.getStartTime())
+                    .build());
         }
         return sessionDtoCollection;
     }

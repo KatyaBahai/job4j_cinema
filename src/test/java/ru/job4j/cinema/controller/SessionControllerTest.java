@@ -29,10 +29,28 @@ class SessionControllerTest {
 
     @Test
     public void whenGetAllSessionsThenSessionsList() {
-        SessionDto sessionDto1 = new SessionDto(
-                0, "Finding Nemo", "big", now(), 120, 500, 2, 2);
-        SessionDto sessionDto2 = new SessionDto(
-                0, "Shrek", "small", now(), 120, 500, 2, 2);
+        SessionDto sessionDto1 = new SessionDto.SessionDtoBuilder()
+                .setSessionId(0)
+                .setFilm("Finding Nemo")
+                .setDurationInMinutes(120)
+                .setHall("big")
+                .setPlaceCount(2)
+                .setPrice(500)
+                .setRowCount(2)
+                .setStartTime(now())
+                .build();
+
+        SessionDto sessionDto2 = new SessionDto.SessionDtoBuilder()
+                .setSessionId(0)
+                .setFilm("Shrek")
+                .setDurationInMinutes(120)
+                .setHall("small")
+                .setPlaceCount(2)
+                .setPrice(500)
+                .setRowCount(2)
+                .setStartTime(now())
+                .build();
+
         List<SessionDto> expectedSessionDtos = List.of(sessionDto1, sessionDto2);
         when(sessionService.getAllSessions()).thenReturn(expectedSessionDtos);
 
@@ -48,8 +66,16 @@ class SessionControllerTest {
     public void whenOpenOneSessionByIdThenGetThisSession() {
         int id = 2;
         ArgumentCaptor<Integer> idCaptor = ArgumentCaptor.forClass(Integer.class);
-        SessionDto sessionDto = new SessionDto(
-                0, "Finding Nemo", "big", now(), 120, 500, 2, 2);
+        SessionDto sessionDto = new SessionDto.SessionDtoBuilder()
+                .setSessionId(0)
+                .setFilm("Finding Nemo")
+                .setDurationInMinutes(120)
+                .setHall("big")
+                .setPlaceCount(2)
+                .setPrice(500)
+                .setRowCount(2)
+                .setStartTime(now())
+                .build();
         when(sessionService.getSessionById(idCaptor.capture())).thenReturn(Optional.of(sessionDto));
 
         var model = new ConcurrentModel();
