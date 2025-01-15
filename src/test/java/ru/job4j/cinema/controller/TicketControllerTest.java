@@ -39,6 +39,7 @@ class TicketControllerTest {
         when(ticketService.save(ticketCaptor.capture())).thenReturn(Optional.of(ticket));
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getSession()).thenReturn(mockHttpSession);
+
         Model model = new ConcurrentModel();
         String view = ticketController.getPurchasePage(model, ticket, request);
 
@@ -54,9 +55,12 @@ class TicketControllerTest {
     public void whenBuyingExistingTicketThenUnsuccessfulMessage() {
         Ticket ticket = new Ticket(0, 1, 1, 1, 0);
         var ticketCaptor = ArgumentCaptor.forClass(Ticket.class);
-        when(ticketService.save(ticketCaptor.capture())).thenReturn(Optional.of(ticket));
+        var user = new User(0, "test", "test@gmail.com", "123");
+        var mockHttpSession = new MockHttpSession();
+        mockHttpSession.setAttribute("user", user);
+        when(ticketService.save(ticketCaptor.capture())).thenReturn(Optional.empty());
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getSession()).thenReturn(new MockHttpSession());
+        when(request.getSession()).thenReturn(mockHttpSession);
 
         Model model = new ConcurrentModel();
         String view = ticketController.getPurchasePage(model, ticket, request);
@@ -64,6 +68,6 @@ class TicketControllerTest {
         String expectedMessage = "Sorry, this seat has already been chosen by somebody. Please, try another one.";
 
         assertThat(view).isEqualTo("/tickets/purchase");
-        assertThat(request.getSession().getAttribute("message")).isEqualTo(expectedMessage);
+        assertThat(model.getAttribute("message")).isEqualTo(expectedMessage);
     }
 }
