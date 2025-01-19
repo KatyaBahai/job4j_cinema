@@ -1,8 +1,8 @@
-### Mindful Cinema
+## Mindful Cinema
 
 Mindful Cinema is a cinema website that provides a seamless experience for users to explore a list of films, register on the website, view available film sessions, and purchase tickets.
 
-# Features
+### Features
 
 - Browse a list of films.
 
@@ -12,7 +12,7 @@ Mindful Cinema is a cinema website that provides a seamless experience for users
 
 - "Purchase" tickets through the website.
 
-# Installation Instructions
+### Installation Instructions
 
 Follow these steps to run the project locally:
 
@@ -56,7 +56,7 @@ mvn spring-boot:run
 
 Open your browser and go to: http://localhost:8080/index
 
-## Technologies Used
+### Technologies Used
 
 Java 17
 
@@ -74,7 +74,7 @@ Liquibase 4.15.0
 
 PostgreSQL 42.5.1
 
-## Contact
+### Contact
 
 You can reach out via Telegram: @Midori_Sun
 
