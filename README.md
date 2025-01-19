@@ -1,6 +1,6 @@
 ## Mindful Cinema
 
-Mindful Cinema is a cinema website that provides a seamless experience for users to explore a list of films, register on the website, view available film sessions, and purchase tickets.
+Mindful Cinema is a cinema website that provides a list of films, register on the website, view available film sessions, and purchase tickets.
 
 ### Features
 
