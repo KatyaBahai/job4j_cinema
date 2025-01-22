@@ -21,11 +21,11 @@
                     <a class="nav-item nav-link active" th:href="@{/films/list}">Films</a>
                     <a class="nav-item nav-link active" th:href="@{/sessions/list}">Schedule</a>
                 </div>
-                <div class="d-flex" th:if="${user.fullName == 'Гость' || user.fullName == null}">
+                <div class="d-flex" th:if="${wowUser.fullName == 'Гость' || wowUser.fullName == null}">
                     <a class="nav-link text-secondary me-3" th:href="@{/users/login}">Sign in</a>
                 </div>
-                <div class="d-flex" th:if="${user.fullName != 'Гость' && user.fullName != null}">
-                    <a class="nav-link text-secondary me-3" href="#" th:text="${user.fullName}"></a>
+                <div class="d-flex" th:if="${wowUser.fullName != 'Гость' && wowUser.fullName != null}">
+                    <a class="nav-link text-secondary me-3" href="#" th:text="${wowUser.fullName}"></a>
                     <a class="nav-link text-secondary" th:href="@{/users/logout}">Sign out</a>
                 </div>
             </div>

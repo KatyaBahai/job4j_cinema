@@ -24,7 +24,7 @@ public class TicketController {
     @PostMapping("/buy")
     public String getPurchasePage(Model model, @ModelAttribute Ticket ticket,  HttpServletRequest request) {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("wowUser");
         ticket.setUserId(user.getId());
         Optional<Ticket> ticketOptional = ticketService.save(ticket);
         if (ticketOptional.isEmpty()) {
