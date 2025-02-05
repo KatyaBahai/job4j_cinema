@@ -69,7 +69,7 @@ class UserControllerTest {
         String view = userController.loginUser(user, model, request);
 
         assertThat(view).isEqualTo("redirect:/index");
-        assertThat(request.getSession().getAttribute("user")).isEqualTo(user);
+        assertThat(request.getSession().getAttribute("wowUser")).isEqualTo(user);
     }
 
     @Test

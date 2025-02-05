@@ -35,7 +35,7 @@ class TicketControllerTest {
         var ticketCaptor = ArgumentCaptor.forClass(Ticket.class);
         var user = new User(0, "test", "test@gmail.com", "123");
         var mockHttpSession = new MockHttpSession();
-        mockHttpSession.setAttribute("user", user);
+        mockHttpSession.setAttribute("wowUser", user);
         when(ticketService.save(ticketCaptor.capture())).thenReturn(Optional.of(ticket));
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getSession()).thenReturn(mockHttpSession);
@@ -57,7 +57,7 @@ class TicketControllerTest {
         var ticketCaptor = ArgumentCaptor.forClass(Ticket.class);
         var user = new User(0, "test", "test@gmail.com", "123");
         var mockHttpSession = new MockHttpSession();
-        mockHttpSession.setAttribute("user", user);
+        mockHttpSession.setAttribute("wowUser", user);
         when(ticketService.save(ticketCaptor.capture())).thenReturn(Optional.empty());
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getSession()).thenReturn(mockHttpSession);
